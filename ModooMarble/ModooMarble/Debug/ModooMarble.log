@@ -1,0 +1,6 @@
+﻿  FlightGameScene.cpp
+c:\users\ta-a-04\source\repos\modoomarble\modoomarble\flightgamescene.cpp(96): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\ta-a-04\source\repos\modoomarble\modoomarble\flightgamescene.cpp(106): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\ta-a-04\source\repos\modoomarble\modoomarble\flightgamescene.cpp(153): warning C4244: '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\ta-a-04\source\repos\modoomarble\modoomarble\flightgamescene.cpp(175): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ModooMarble.vcxproj -> C:\Users\TA-A-04\source\repos\ModooMarble\Debug\ModooMarble.exe
