@@ -99,6 +99,7 @@ void FlightGameScene::Update(float fETime)
 			m_Fexplosion += fETime;
 		else
 			m_Fexplosion = 0;
+
 		if (m_iFever == 2)
 			Effectconut += fETime;
 		if (m_fTanCount > 0.3)
@@ -136,7 +137,7 @@ void FlightGameScene::Update(float fETime)
 					break;
 				}
 			}
-			else if ((*iter)->GetUse())
+			else if (!(*iter)->GetUse())
 			{
 				if ((*iter) == Objectlist.back())
 				{
