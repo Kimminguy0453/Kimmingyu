@@ -1,6 +1,5 @@
-﻿  FlightGameScene.cpp
-c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(96): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(107): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(154): warning C4244: '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(176): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  ColorPaperGameScene.cpp
+c:\git\kimmingyu\modoomarble\modoomarble\colorpapergamescene.cpp(140): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\kimmingyu\modoomarble\modoomarble\colorpapergamescene.cpp(128): warning C4101: 'OldFont' :참조되지 않은 지역 변수입니다.
+c:\git\kimmingyu\modoomarble\modoomarble\colorpapergamescene.cpp(128): warning C4101: 'hFont' :참조되지 않은 지역 변수입니다.
   ModooMarble.vcxproj -> C:\git\Kimmingyu\ModooMarble\Debug\ModooMarble.exe

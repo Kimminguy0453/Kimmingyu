@@ -91,7 +91,7 @@ void ColorPaperGameScene::Update(float fETime)
 		}
 		if (m_fTimerGague > 0)
 		{
-			m_fTimerGague -= 50 * fETime;
+			m_fTimerGague -= 40 * fETime;
 			if (m_fTimerGague < 0)
 				m_fTimerGague = 0;
 		}

@@ -23,9 +23,8 @@ void FlightGameScene::Init(HWND hWnd)
 	Flight_Y = 350.0f;
 	m_fTanCount = 0.0f;
 	m_Fexplosion = 0.0f;
-	Effectconut = 0.0f;
 	m_fTimerGague = 370;
-
+	FeverCount = 0;
 	JEngine::InputManager::GetInstance()->Clear();
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_ESCAPE);
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_LEFT);
@@ -100,9 +99,7 @@ void FlightGameScene::Update(float fETime)
 		else
 			m_Fexplosion = 0;
 
-		if (m_iFever == 2)
-			Effectconut += fETime;
-		if (m_fTanCount > 0.3)
+		if (m_fTanCount > 0.2)
 		{
 			Objectlist.push_back(new FlightObject(m_iFever, Flight_X, Flight_Y));
 			m_fTanCount = 0;
@@ -111,6 +108,16 @@ void FlightGameScene::Update(float fETime)
 		{
 			m_iState--;
 			m_Fexplosion = 0;
+		}
+		if (m_iFever == 2)
+		{
+			FeverCount += fETime;
+			if (FeverCount > 5)
+			{
+				m_iCombo = 0;
+				m_iFever = 0;
+				FeverCount = 0;
+			}
 		}
 
 		for (auto iter = Objectlist.begin(); iter != Objectlist.end(); iter++)
@@ -123,7 +130,11 @@ void FlightGameScene::Update(float fETime)
 				{
 					m_iTotalScore += score;
 					if (score == 0)
+					{
 						m_iState = 3;
+						m_iCombo = 0;
+						m_iFever = 0;
+					}
 					else
 						SetCombo();
 				}
@@ -151,9 +162,12 @@ void FlightGameScene::Update(float fETime)
 	}
 	if (m_fTimerGague > 0)
 	{
-		m_fTimerGague -= 50 * fETime;
-		if (m_fTimerGague < 0)
+		m_fTimerGague -= fETime;
+		if (m_fTimerGague <= 0)
+		{
 			m_fTimerGague = 0;
+			m_GameOver = true;
+		}
 	}
 }
 
@@ -188,7 +202,6 @@ void FlightGameScene::Draw(HDC hdc)
 	if (m_iFever == 2)
 	{
 		FeverEffect->Draw(0, 0);
-		Effectconut = 0;
 	}
 }
 

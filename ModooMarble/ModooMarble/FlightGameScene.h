@@ -25,7 +25,7 @@ private:
 	int m_iState;
 	float m_fTanCount;
 	float m_Fexplosion;
-	float Effectconut;
+	float FeverCount;
 	GameObject* test;
 	list <GameObject*> Objectlist;
 public:
