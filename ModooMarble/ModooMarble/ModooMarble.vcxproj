@@ -150,6 +150,8 @@
     <ClInclude Include="FlightGameScene.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameSelectScene.h" />
+    <ClInclude Include="Rank.h" />
+    <ClInclude Include="RankScene.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +160,8 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameSelectScene.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Rank.cpp" />
+    <ClCompile Include="RankScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

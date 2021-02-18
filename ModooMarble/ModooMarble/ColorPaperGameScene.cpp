@@ -2,7 +2,7 @@
 #include "SceneManager.h"
 #include "ResoucesManager.h"
 #include "InputManager.h"
-
+#include "Rank.h"
 
 ColorPaperGameScene::ColorPaperGameScene()
 {
@@ -15,7 +15,8 @@ ColorPaperGameScene::~ColorPaperGameScene()
 void ColorPaperGameScene::Init(HWND hWnd)
 {
 	m_iTotalScore = 0;
-	m_fTimerGague = 370;
+	m_fTimerGague = 370.f;
+	GameOver = false;
 	SetCombo(false);//fever 게이지와 콤보수를 초기화.
 	JEngine::InputManager::GetInstance()->Clear();
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_ESCAPE);
@@ -30,31 +31,32 @@ void ColorPaperGameScene::Init(HWND hWnd)
 	TimerBar = JEngine::ResoucesManager::GetInstance()->GetBitmap("ColoredPaperTimeBar.bmp");
 	Overview = JEngine::ResoucesManager::GetInstance()->GetBitmap("TimeOver.bmp"); 
 	JEngine::UIManager::GetInstance()->AddLabel(to_string(m_iTotalScore), 200, 20, DT_CENTER, std::bind(&ColorPaperGameScene::callbackScore, this));
+	JEngine::UIManager::GetInstance()->AddLabel("게임종료 : ESC", 160, 588, DT_CENTER, NULL);
 }
 
 bool ColorPaperGameScene::Input(float fETime)
 {
 	if (JEngine::InputManager::GetInstance()->isKeyUp(VK_ESCAPE))
 		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_SELECT);
-	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_LEFT))
+	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_LEFT) && !GameOver)
 	{
 		m_Paperlist.back()->Input(VK_LEFT);
 		m_MovePaper.push_back(m_Paperlist.back());
 		m_Paperlist.pop_back();
 	}
-	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_RIGHT))
+	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_RIGHT) && !GameOver)
 	{
 		m_Paperlist.back()->Input(VK_RIGHT);
 		m_MovePaper.push_back(m_Paperlist.back());
 		m_Paperlist.pop_back();
 	}
-	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_UP))
+	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_UP) && !GameOver)
 	{
 			m_Paperlist.back()->Input(VK_UP);
 			m_MovePaper.push_back(m_Paperlist.back());
 			m_Paperlist.pop_back();
 	}
-	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_DOWN))
+	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_DOWN) && !GameOver)
 	{
 		m_Paperlist.back()->Input(VK_DOWN);
 		m_MovePaper.push_back(m_Paperlist.back());
@@ -65,7 +67,7 @@ bool ColorPaperGameScene::Input(float fETime)
 
 void ColorPaperGameScene::Update(float fETime)
 {
-	if (m_fTimerGague > 0)
+	if (!GameOver)
 	{
 		if (m_Paperlist.size() < 5)
 			m_Paperlist.push_front(new PaperObject(m_iFeverLevel));
@@ -89,11 +91,17 @@ void ColorPaperGameScene::Update(float fETime)
 				m_MovePaper.pop_front();
 			}
 		}
+
 		if (m_fTimerGague > 0)
 		{
-			m_fTimerGague -= 40 * fETime;
-			if (m_fTimerGague < 0)
+			m_fTimerGague -= 30 * fETime;
+			if (m_fTimerGague <= 0)
+			{
 				m_fTimerGague = 0;
+				GameOver = true;
+				Rank::GetInstance()->RenewalRank(m_iTotalScore, SCENE_INDEX_PAPER);
+				Rank::GetInstance()->SaveRank(SCENE_INDEX_PAPER);
+			}
 		}
 	}
 }
@@ -139,7 +147,7 @@ void ColorPaperGameScene::Draw(HDC hdc)
 
 	TimerBar->TransDraw(20, 618, m_fTimerGague, 30);
 
-	if (m_fTimerGague == 0)
+	if (GameOver)
 	{
 		Overview->Draw(100, 300);
 	}

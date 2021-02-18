@@ -6,7 +6,6 @@ namespace JEngine
 	{
 	}
 
-
 	Scene::~Scene()
 	{
 	}

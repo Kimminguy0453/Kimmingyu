@@ -17,10 +17,12 @@ private:
 	vector<JEngine::BitMap*> m_pFeverBar;
 	JEngine::UIObject* m_pScore;
 	float m_fTimerGague;
+
 	int m_icurCombo;
 	int m_iFeverCombo;
 	int m_iFeverLevel;
 	int m_iTotalScore;
+	bool GameOver;
 public:
 	ColorPaperGameScene();
 	~ColorPaperGameScene();

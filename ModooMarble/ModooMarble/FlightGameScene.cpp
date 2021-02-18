@@ -15,22 +15,30 @@ FlightGameScene::~FlightGameScene()
 void FlightGameScene::Init(HWND hWnd)
 {
 	m_GameOver = false;
+	m_Rank = false;
+
 	m_iState = 0;
 	m_iTotalScore = 0;
 	m_iFever = 0;
 	m_iCombo = 0;
+
 	Flight_X = 224.0f;
 	Flight_Y = 350.0f;
 	m_fTanCount = 0.0f;
 	m_Fexplosion = 0.0f;
 	m_fTimerGague = 370;
+
 	FeverCount = 0;
+	count = 0;
+
 	JEngine::InputManager::GetInstance()->Clear();
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_ESCAPE);
+	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_SPACE);
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_LEFT);
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_RIGHT);
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_UP);
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_DOWN);
+
 	m_pBack = JEngine::ResoucesManager::GetInstance()->GetBitmap("FlightGameBack.bmp"); 
 	Overview = JEngine::ResoucesManager::GetInstance()->GetBitmap("TimeOver.bmp");
 	TimerBar = JEngine::ResoucesManager::GetInstance()->GetBitmap("ColoredPaperTimeBar.bmp");
@@ -46,6 +54,7 @@ void FlightGameScene::Init(HWND hWnd)
 	Initvector("Fever3.bmp", false);
 
 	JEngine::UIManager::GetInstance()->AddLabel(to_string(m_iTotalScore), 200, 20, DT_CENTER, std::bind(&FlightGameScene::callbackScore, this));
+	JEngine::UIManager::GetInstance()->AddLabel("게임종료 : ESC", 160, 588, DT_CENTER, NULL);
 }
 
 void FlightGameScene::Initvector(string str, bool Character)
@@ -63,6 +72,8 @@ bool FlightGameScene::Input(float fETime)
 {
 	if (JEngine::InputManager::GetInstance()->isKeyUp(VK_ESCAPE))
 		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_SELECT);
+	else if (JEngine::InputManager::GetInstance()->isKeyUp(VK_SPACE) && m_GameOver)
+		m_Rank = true;
 	else if (JEngine::InputManager::GetInstance()->isKeyPress(VK_LEFT) && !m_GameOver && m_iState ==0)
 	{
 		if(Flight_X - 200 * fETime >= 35)
@@ -88,6 +99,7 @@ bool FlightGameScene::Input(float fETime)
 
 void FlightGameScene::Update(float fETime)
 {
+	
 	if (!m_GameOver)
 	{
 		JEngine::RECT rt;
@@ -162,7 +174,7 @@ void FlightGameScene::Update(float fETime)
 	}
 	if (m_fTimerGague > 0)
 	{
-		m_fTimerGague -= fETime;
+		m_fTimerGague -= 30 * fETime;
 		if (m_fTimerGague <= 0)
 		{
 			m_fTimerGague = 0;
@@ -199,6 +211,9 @@ void FlightGameScene::Draw(HDC hdc)
 
 	if (m_GameOver)
 		Overview->Draw(100, 300);
+
+	if(m_Rank)
+
 	if (m_iFever == 2)
 	{
 		FeverEffect->Draw(0, 0);

@@ -48,8 +48,8 @@ void PaperObject::Update(float fETime)
 	{
 		if (m_iMoveWay == VK_LEFT)
 		{
-			if(m_fGameOB_X - 200 * fETime >= 15)
-				m_fGameOB_X -= 200 * fETime;
+			if(m_fGameOB_X - 300 * fETime >= 15)
+				m_fGameOB_X -= 300 * fETime;
 			else
 			{
 				m_bMove = false;
@@ -62,8 +62,8 @@ void PaperObject::Update(float fETime)
 		}
 		else if(m_iMoveWay == VK_RIGHT)
 		{
-			if(m_fGameOB_X + 200 * fETime <= 290)
-				m_fGameOB_X += 200 * fETime;
+			if(m_fGameOB_X + 300 * fETime <= 290)
+				m_fGameOB_X += 300 * fETime;
 			else
 			{
 				m_bMove = false;
@@ -76,8 +76,8 @@ void PaperObject::Update(float fETime)
 		}
 		else if (m_iMoveWay == VK_DOWN)
 		{
-			if (m_fGameOB_Y + 200 * fETime <= 442)
-				m_fGameOB_Y += 200 * fETime;
+			if (m_fGameOB_Y + 300 * fETime <= 442)
+				m_fGameOB_Y += 300 * fETime;
 			else
 			{
 				m_bMove = false;
@@ -90,8 +90,8 @@ void PaperObject::Update(float fETime)
 		}
 		else if (m_iMoveWay == VK_UP)
 		{
-			if (m_fGameOB_Y - 200 * fETime >= 148)
-				m_fGameOB_Y -= 200 * fETime;
+			if (m_fGameOB_Y - 300 * fETime >= 148)
+				m_fGameOB_Y -= 300 * fETime;
 			else
 			{
 				m_bMove = false;

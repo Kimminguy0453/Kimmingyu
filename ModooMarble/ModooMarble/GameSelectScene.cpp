@@ -4,6 +4,7 @@
 #include "ResoucesManager.h"
 #include "defines.h"
 #include "UIManager.h"
+#include "Rank.h"
 
 
 GameSelectScene::GameSelectScene()
@@ -24,6 +25,8 @@ void GameSelectScene::Init(HWND hWnd)
 	m_pBack = JEngine::ResoucesManager::GetInstance()->GetBitmap("GameSelect.bmp");
 	JEngine::UIManager::GetInstance()->AddButton(320, 166, "OnSelect.bmp", std::bind(&GameSelectScene::PaperGameClick, this));
 	JEngine::UIManager::GetInstance()->AddButton(320, 249, "OnSelect.bmp", std::bind(&GameSelectScene::FilghtGameClick, this));
+	JEngine::UIManager::GetInstance()->AddLabel("1 µî : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_PAPER)), 130, 200, DT_CENTER,  NULL);
+	JEngine::UIManager::GetInstance()->AddLabel("1 µî : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT)), 130, 280, DT_CENTER, NULL);
 }
 
 bool GameSelectScene::Input(float fETime)
@@ -42,6 +45,10 @@ void GameSelectScene::Update(float fETime)
 void GameSelectScene::Draw(HDC hdc)
 {
 	m_pBack->DrawBitblt(0, 0);
+	HBRUSH hWhite = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	HBRUSH hold = (HBRUSH)SelectObject(hdc, hWhite);
+
+
 }
 
 void GameSelectScene::Release()
@@ -51,11 +58,13 @@ void GameSelectScene::Release()
 
 bool GameSelectScene::PaperGameClick()
 {
-	JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_PAPER);
+	Rank::GetInstance()->InitGameType(SCENE_INDEX_PAPER);
+	JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_RANK);
 	return true;
 }
 bool GameSelectScene::FilghtGameClick()
 {
-	JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_FLIGHT);
+	Rank::GetInstance()->InitGameType(SCENE_INDEX_FLIGHT);
+	JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_RANK);
 	return true;
 }

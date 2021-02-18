@@ -5,6 +5,7 @@ namespace JEngine
 {
 	Label::Label()
 	{
+		m_Use = true;
 	}
 
 
@@ -18,19 +19,19 @@ namespace JEngine
 		m_iy = y;
 		GetTextExtentPoint32(ResoucesManager::GetInstance()->GetBackDC(), str.c_str(), str.length(), &size);
 		SetPos(m_ix, m_iy, m_ix + size.cx, m_iy  + size.cy);
-		m_pCallBack = callback;
+		m_pStringCallBack = callback;
 		m_strPrint = str;
 		m_dwDrawOption = drawOption;
 	}
 
 	void Label::Draw()
 	{
-		if (m_pCallBack != NULL)
+		if (m_pStringCallBack != NULL)
 		{
-			m_strPrint = m_pCallBack();
+			m_strPrint = m_pStringCallBack();
 			GetTextExtentPoint32(ResoucesManager::GetInstance()->GetBackDC(), m_strPrint.c_str(), m_strPrint.length(), &size);
 			SetPos(m_ix, m_iy, m_ix + size.cx, m_iy + size.cy);
 		}
-		DrawText(ResoucesManager::GetInstance()->GetBackDC(), m_strPrint.c_str(), m_strPrint.length(),&m_rcPos.ToWinRECT(), m_dwDrawOption);
+		DrawText(ResoucesManager::GetInstance()->GetBackDC(), m_strPrint.c_str(), m_strPrint.length(), &m_rcPos.ToWinRECT(), m_dwDrawOption);
 	}
 }

@@ -19,9 +19,10 @@ namespace JEngine
 		SIZE					size;
 		DWORD					m_dwDrawOption;
 		string					m_strPrint;
-		pStringFunc				m_pCallBack;
+		pStringFunc				m_pStringCallBack;
 		int						m_ix;
 		int						m_iy;
+		bool					m_Use;
 	public:
 		Label();
 
