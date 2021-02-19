@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "ResoucesManager.h"
 #include "InputManager.h"
+#include "Rank.h"
 
 FlightGameScene::FlightGameScene()
 {
@@ -179,6 +180,8 @@ void FlightGameScene::Update(float fETime)
 		{
 			m_fTimerGague = 0;
 			m_GameOver = true;
+			Rank::GetInstance()->RenewalRank(m_iTotalScore, SCENE_INDEX_FLIGHT);
+			Rank::GetInstance()->SaveRank(SCENE_INDEX_FLIGHT);
 		}
 	}
 }

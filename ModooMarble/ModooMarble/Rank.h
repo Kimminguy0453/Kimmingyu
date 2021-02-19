@@ -12,7 +12,7 @@ private:
 	int GameType;
 public:
 	Rank();
-	void LoadRank();
+	void LoadRank(int type);
 	void SaveRank(int type);
 	void RenewalRank(int Score, int type);
 	void InitGameType(int type);

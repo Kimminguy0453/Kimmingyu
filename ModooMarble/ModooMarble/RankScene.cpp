@@ -17,23 +17,32 @@ void RankScene::Init(HWND hWnd)
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_ESCAPE);
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_LBUTTON);
 	Type = Rank::GetInstance()->GetGameType();
-	if(Type == SCENE_INDEX_PAPER)
+	if (Type == SCENE_INDEX_PAPER)
+	{
 		m_pBack = JEngine::ResoucesManager::GetInstance()->GetBitmap("ColoredPaperBack.bmp");
+		JEngine::UIManager::GetInstance()->AddLabel("1 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_PAPER)), 180, 180, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("2 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_PAPER, 1)), 180, 220, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("3 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_PAPER, 2)), 180, 260, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("4 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_PAPER, 3)), 180, 300, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("5 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_PAPER, 4)), 180, 340, DT_CENTER, NULL);
+	}
 	else
+	{
 		m_pBack = JEngine::ResoucesManager::GetInstance()->GetBitmap("123.bmp");
+		JEngine::UIManager::GetInstance()->AddLabel("1 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT)), 180, 180, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("2 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 1)), 180, 220, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("3 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 2)), 180, 260, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("4 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 3)), 180, 300, DT_CENTER, NULL);
+		JEngine::UIManager::GetInstance()->AddLabel("5 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 4)), 180, 340, DT_CENTER, NULL);
+	}
 
 	JEngine::UIManager::GetInstance()->AddButton(180, 480, "OnSelect.bmp", std::bind(&RankScene::OnClick, this));
-	JEngine::UIManager::GetInstance()->AddLabel("1 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_PAPER)), 180, 180, DT_CENTER, NULL);
-	JEngine::UIManager::GetInstance()->AddLabel("2 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 1)), 180, 220, DT_CENTER, NULL);
-	JEngine::UIManager::GetInstance()->AddLabel("3 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 2)), 180, 260, DT_CENTER, NULL);
-	JEngine::UIManager::GetInstance()->AddLabel("4 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 3)), 180, 300, DT_CENTER, NULL);
-	JEngine::UIManager::GetInstance()->AddLabel("5 등 : " + to_string(Rank::GetInstance()->GetScore(SCENE_INDEX_FLIGHT, 4)), 180, 340, DT_CENTER, NULL);
 }
 
 bool RankScene::Input(float fETime)
 {
 	if (JEngine::InputManager::GetInstance()->isKeyUp(VK_ESCAPE))
-		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_TITLE);
+		JEngine::SceneManager::GetInstance()->LoadScene(SCENE_INDEX_SELECT);
 
 	return false;
 }

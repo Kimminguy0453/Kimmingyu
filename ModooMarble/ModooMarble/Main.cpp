@@ -10,9 +10,9 @@
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow)
 {
-	//엔진 객체를 생성하고 타이틀과 윈도우 사이즈를 넣어준다.
-	Rank::GetInstance()->LoadRank();
 	JEngine::MainEngine engine("EngineTest", 414, 649);
+	Rank::GetInstance()->LoadRank(SCENE_INDEX_PAPER);
+	Rank::GetInstance()->LoadRank(SCENE_INDEX_FLIGHT);
 	JEngine::SceneManager::GetInstance()->RegistScene(new TitleScene);
 	JEngine::SceneManager::GetInstance()->RegistScene(new GameSelectScene);
 	JEngine::SceneManager::GetInstance()->RegistScene(new ColorPaperGameScene);
