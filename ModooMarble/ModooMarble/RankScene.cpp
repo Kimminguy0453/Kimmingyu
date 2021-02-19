@@ -49,16 +49,11 @@ bool RankScene::Input(float fETime)
 
 void RankScene::Update(float fETime)
 {
-
 }
 
 void RankScene::Draw(HDC hdc)
 {
 	m_pBack->DrawBitblt(0, 0);
-	HBRUSH hWhite = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	HBRUSH hold = (HBRUSH)SelectObject(hdc, hWhite);
-
-
 }
 
 void RankScene::Release()

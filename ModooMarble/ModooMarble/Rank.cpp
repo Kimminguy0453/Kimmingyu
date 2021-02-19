@@ -4,32 +4,34 @@
 
 Rank::Rank()
 {
-	memset(&PaperRank, 0, sizeof(int)*5);
+	memset(&PaperRank, 0, sizeof(int)*5);//배열 부분 0으로 초기화
 	memset(&FlightRank, 0, sizeof(int)*5);
 }
 
 void Rank::LoadRank(int type)
 {
+	HANDLE hFile;
 	DWORD ReadGame;
-	int Score;
+	int Score = 0;
 	if (type == SCENE_INDEX_PAPER)
 	{
 		HANDLE hFile = CreateFile(TEXT("PaperGameRank.txt"), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 		for (int i = 0; i < 5; i++)
 		{
 			DWORD readB;
-			ReadFile(hFile, &PaperRank[i], sizeof(int), &readB, NULL);
+			ReadFile(hFile, &Score, sizeof(int), &readB, NULL);
+			PaperRank.push_back(Score);
 		}
 		CloseHandle(hFile);
 	}
 	else
 	{
-
 		HANDLE hFile = CreateFile(TEXT("FilghtGameRank.txt"), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 		for (int i = 0; i < 5; i++)
 		{
 			DWORD readB;
-			ReadFile(hFile, &FlightRank[i], sizeof(int), &readB, NULL);
+			ReadFile(hFile, &Score, sizeof(int), &readB, NULL);
+			FlightRank.push_back(Score);
 		}
 		CloseHandle(hFile);
 	}
@@ -38,10 +40,11 @@ void Rank::LoadRank(int type)
 void Rank::SaveRank(int type)
 {
 	DWORD WriteGame;
+	int score;
 	if (type == SCENE_INDEX_PAPER)
 	{
 		HANDLE hFile = CreateFile(TEXT("PaperGameRank.txt"), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-		for (int i= 0; i < 5; i++)
+		for (int i = 0; i < 5; i++)
 			WriteFile(hFile, &PaperRank[i], sizeof(int), &WriteGame, NULL);
 		CloseHandle(hFile);
 	}
@@ -94,4 +97,6 @@ void Rank::InitGameType(int type)
 }
 Rank::~Rank()
 {
+	PaperRank.clear();
+	FlightRank.clear();
 }

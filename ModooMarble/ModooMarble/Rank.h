@@ -7,8 +7,8 @@
 class Rank : public SingleTon<Rank>
 {
 private:
-	int PaperRank[5];
-	int FlightRank[5];
+	vector<int> PaperRank;
+	vector<int> FlightRank;
 	int GameType;
 public:
 	Rank();

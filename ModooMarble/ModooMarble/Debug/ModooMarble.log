@@ -1,2 +1,6 @@
-﻿  RankScene.cpp
+﻿  FlightGameScene.cpp
+c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(109): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(210): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\kimmingyu\modoomarble\modoomarble\flightgamescene.cpp(218): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ModooMarble.vcxproj -> C:\git\Kimmingyu\ModooMarble\Debug\ModooMarble.exe

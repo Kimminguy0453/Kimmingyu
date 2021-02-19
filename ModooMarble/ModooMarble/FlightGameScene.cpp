@@ -17,6 +17,7 @@ void FlightGameScene::Init(HWND hWnd)
 {
 	m_GameOver = false;
 	m_Rank = false;
+	m_bInvincibility = false;
 
 	m_iState = 0;
 	m_iTotalScore = 0;
@@ -107,7 +108,7 @@ void FlightGameScene::Update(float fETime)
 		int score = 0;
 		rt.Set(Flight_X - m_pChara[m_iState]->GetBitSize().cx / 4, Flight_Y - m_pChara[m_iState]->GetBitSize().cy/ 4, Flight_X + m_pChara[m_iState]->GetBitSize().cx / 4, Flight_Y + m_pChara[m_iState]->GetBitSize().cy / 4);
 		m_fTanCount += fETime;
-		if(m_iState != 0)
+		if(m_iState != 0 || m_bInvincibility)
 			m_Fexplosion += fETime;
 		else
 			m_Fexplosion = 0;
@@ -119,7 +120,10 @@ void FlightGameScene::Update(float fETime)
 		}
 		if (m_Fexplosion > 0.5)
 		{
-			m_iState--;
+			if (m_iState > 0)
+				m_iState--;
+			else
+				m_bInvincibility = false;
 			m_Fexplosion = 0;
 		}
 		if (m_iFever == 2)
@@ -142,11 +146,12 @@ void FlightGameScene::Update(float fETime)
 				if (m_iState == 0)
 				{
 					m_iTotalScore += score;
-					if (score == 0)
+					if (score == 0 && !m_bInvincibility)
 					{
 						m_iState = 3;
 						m_iCombo = 0;
 						m_iFever = 0;
+						m_bInvincibility = true;
 					}
 					else
 						SetCombo();
@@ -175,7 +180,7 @@ void FlightGameScene::Update(float fETime)
 	}
 	if (m_fTimerGague > 0)
 	{
-		m_fTimerGague -= 30 * fETime;
+		m_fTimerGague -= 10 * fETime;
 		if (m_fTimerGague <= 0)
 		{
 			m_fTimerGague = 0;

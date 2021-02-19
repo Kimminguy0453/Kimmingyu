@@ -23,6 +23,7 @@ void TitleScene::Init(HWND hWnd)
 	JEngine::InputManager::GetInstance()->RegistKeyCode(VK_LBUTTON);
 	m_pBack = JEngine::ResoucesManager::GetInstance()->GetBitmap("Title.bmp");
 	JEngine::UIManager::GetInstance()->AddButton(180, 520, "OnSelect.bmp", std::bind(&TitleScene::OnClick, this));
+	JEngine::UIManager::GetInstance()->AddLabel("ESC를 누를 시 종료", 140, 588, DT_CENTER, NULL);
 }
 
 bool TitleScene::Input(float fETime)

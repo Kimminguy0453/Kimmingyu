@@ -18,11 +18,13 @@ private:
 	JEngine::BitMap* TimerBar;
 	bool m_GameOver;
 	bool m_Rank;
+	bool m_bInvincibility;
 
 	int m_iCombo;
 	int m_iFever;
 	int m_iTotalScore;
 	int m_iState;
+
 
 	float m_fTimerGague;
 	float Flight_X;
